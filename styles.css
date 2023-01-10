@@ -1,0 +1,9 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: 400;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:blanchedalmond;
+    background-color: dimgrey;
+}
