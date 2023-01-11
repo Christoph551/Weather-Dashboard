@@ -19,14 +19,28 @@
     <title>Weather Dashboard</title>
 </head>
 <header>
-    <h1>First Group Project!!!</h1>
+    <h1>5 Day Weather Forecast</h1>
 </header>
 
 <body>
-    <p>Files verified to be linked properly thus far.</p>
-    <br>
-    <p>Included jquery and bootstrap, as well as linked our CSS and JS files.</p>
-    
-
+    <section id="userInput">
+        <div class="col-md-2">
+            <label for="inputCity" class="form-label">Search for a city:</label>
+            <input type="text" class="form-control" id="inputCity">
+            <!-- May be able to add a loading animation to the button after initializing the eventListener -->
+            <button id="submitBtn" type="button" class="btn btn-primary col-md-12">Submit</button>
+        <p id="searchHistory">Previously Searched Cities</p>
+            <article>
+                <ul class="list-group shadow-lg">
+                    <!-- Text entries here are placeholders -->
+                    <li id="previousCity1" class="list-group-item rounded">Tucson</li> 
+                    <li id="previousCity2" class="list-group-item rounded">Los Angeles</li>
+                    <li id="previousCity3" class="list-group-item rounded">Fort Worth</li>
+                    <li id="previousCity4" class="list-group-item rounded">Detroit</li>
+                    <li id="previousCity5" class="list-group-item rounded">Phoenix</li>
+                </ul>
+            </article>
+        </div>
+    </section>
 </body>
 </html>
