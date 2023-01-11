@@ -1,9 +1,63 @@
 h1 {
     display: flex;
     justify-content: center;
-    font-size: x-large;
+    align-items: center;
+    height: 100px;
+    width:auto;
+    font-size: 50px;
     font-weight: 400;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color:blanchedalmond;
-    background-color: dimgrey;
+    color:rgb(255, 255, 255);
+    background-color: rgb(63, 74, 240);
+    border: thick solid black;
 }
+
+body {
+    margin-bottom: 20px;
+    background-color: rgb(216, 215, 215);
+}
+
+#userInput {
+    display: flex;
+}
+
+.col-md-2 {
+    color: rgb(51, 51, 51);
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-left: 40px;
+    border-bottom: thick solid #797979;
+}
+
+.form-label {
+    display: flex;
+    justify-content: center;
+}
+
+.form-control {
+    border: 2px solid black;
+}
+
+#submitBtn {
+    margin: 20px 0px 100px 0px;
+    border: 2px solid black;
+}
+
+#searchHistory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: thick solid #797979;
+    color:#5a5a5a;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px 10px 0px;
+    font-size: large;
+    background-color: rgb(153, 153, 153);
+    border: thin solid black;
+}
+
