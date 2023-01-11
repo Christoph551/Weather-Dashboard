@@ -9,29 +9,29 @@
     rel="stylesheet" 
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
     crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css" /> <!-- Link to our CSS file -->
     <script defer
-        src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-        crossorigin="anonymous">
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="styles.css" /> <!-- Link to our CSS file -->
     <script defer src="script.js"></script> <!-- JavaScript file is deferred -->
     <title>Weather Dashboard</title>
 </head>
 <header>
-    <h1>5 Day Weather Forecast</h1>
+    <h1 class="rounded">Weather Dashboard</h1>
 </header>
 
 <body>
-    <section id="userInput">
+    <aside id="userInput">
         <div class="col-md-2">
-            <label for="inputCity" class="form-label">Search for a city:</label>
+            <label for="inputCity" class="form-label">Search For A City:</label>
             <input type="text" class="form-control" id="inputCity">
             <!-- May be able to add a loading animation to the button after initializing the eventListener -->
             <button id="submitBtn" type="button" class="btn btn-primary col-md-12">Submit</button>
         <p id="searchHistory">Previously Searched Cities</p>
             <article>
-                <ul class="list-group shadow-lg">
+                <ul class="list-group shadow-lg py-3">
                     <!-- Text entries here are placeholders -->
                     <li id="previousCity1" class="list-group-item rounded">Tucson</li> 
                     <li id="previousCity2" class="list-group-item rounded">Los Angeles</li>
@@ -41,6 +41,57 @@
                 </ul>
             </article>
         </div>
-    </section>
+    </aside> 
+    <section id="currentDate" class="row"></section> <!-- Try moving this out of the main. Prv ln. 46 -->
+<main id="main" class="container text-center">
+<!-- This is where the JS should print the figure/div/h2 elements -->
+
+    <figure>    
+        <div>
+        Test to display the container for today's weather. Humidity, wind, etc... 
+        </div>  
+    </figure>
+</main>
+
+<section class="days">
+<!-- Thinking of using an id to later reference with JS for which day -->
+    <ol class="listItems">
+        <li>
+            <p id="day1">x</p>
+        </li>
+        <li>
+            <p id="day2">x</p>
+        </li>
+        <li>
+            <p id="day3">x</p> 
+        </li>
+        <li>
+            <p id="day4">x</p>
+        </li>
+        <li>
+            <p id="day5">x</p>
+        </li>
+    </ol>
+</section>
+<section>
+    <ol class="dayDisplay">
+        <li>
+            <p>Monday</p>
+        </li>
+        <li>
+            <p>Tuesday</p>
+        </li>
+        <li>
+            <p>Wednesday</p>
+        </li>
+        <li>
+            <p>Thursday</p>
+        </li>
+        <li>
+            <p>Friday</p>
+        </li>
+    </ol>
+</section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
 </body>
 </html>
