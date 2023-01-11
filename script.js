@@ -6,7 +6,7 @@
 const apiKey = '63b77ed365bd0d35dba55f456d174d34'; // https://home.openweathermap.org/api_keys
 
 const $main = document.querySelector('#main');
-const dateFormat = dayjs().format("MMMM D, YYYY h:mm A");
+const dateFormat = dayjs().format("MMMM D, YYYY");
 const $currentDate = document.querySelector('#currentDate');
 const $submitBtn = document.querySelector('#submitBtn');
 const $userInput = document.querySelector('#userInput');
