@@ -43,36 +43,55 @@
         </div>
     </aside> 
     <section id="currentDate" class="row"></section> <!-- Try moving this out of the main. Prv ln. 46 -->
-    <main id="main" class="container text-center">
+<main id="main" class="container text-center">
 <!-- This is where the JS should print the figure/div/h2 elements -->
 
-        <figure>    
-            <div>
-            Test to display the container for today's weather. Humidity, wind, etc... 
-            </div>  
-        </figure>
+    <figure>    
+        <div>
+        Test to display the container for today's weather. Humidity, wind, etc... 
+        </div>  
+    </figure>
+</main>
 
-
-        <area class="row">
-        <!-- Thinking of using an id to later reference with JS for which day -->
-            <div>
-                <img id="day1" src="" class="col" alt="">
-            </div>
-            <!-- May have to add these elements using a for loop -->
-            <div>
-                <img id="day2" src="" class="col" alt="">
-            </div>
-            <div>
-                <img id="day3" src="" class="col" alt="">
-            </div>
-            <div>
-                <img id="day4" src="" class="col" alt="">
-            </div>
-            <div>
-                <img id="day5" src="" class="col" alt="">
-            </div>
-        </area>
-    </main>
+<section class="days">
+<!-- Thinking of using an id to later reference with JS for which day -->
+    <ol class="listItems">
+        <li>
+            <p id="day1">x</p>
+        </li>
+        <li>
+            <p id="day2">x</p>
+        </li>
+        <li>
+            <p id="day3">x</p> 
+        </li>
+        <li>
+            <p id="day4">x</p>
+        </li>
+        <li>
+            <p id="day5">x</p>
+        </li>
+    </ol>
+</section>
+<section>
+    <ol class="dayDisplay">
+        <li>
+            <p>Monday</p>
+        </li>
+        <li>
+            <p>Tuesday</p>
+        </li>
+        <li>
+            <p>Wednesday</p>
+        </li>
+        <li>
+            <p>Thursday</p>
+        </li>
+        <li>
+            <p>Friday</p>
+        </li>
+    </ol>
+</section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
 </body>
 </html>

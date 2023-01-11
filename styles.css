@@ -96,14 +96,76 @@ figure {
     align-items: center;
 }
 
-area {
-    width: 20%;
-    height: 20%;
-    display: flex;
-}
 
 .container {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.days {
+    display: flex;
+    flex-direction: column;
+}
+
+.listItems {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    list-style-type: none;
+}
+
+
+#day1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: thick solid black;
+}
+
+#day2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: thick solid black;
+}
+
+#day3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: thick solid black;
+}
+
+#day4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: thick solid black;
+}
+
+#day5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: thick solid black;
+}
+
+.dayDisplay {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    list-style-type: none;
+    font-size: x-large;
+    font-weight: bold;
 }
