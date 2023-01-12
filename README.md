@@ -12,6 +12,10 @@ Also, the user should be able to see previously searched cities that they have s
 
 Please refer to the following screenshots for an example of the functionality. 
 
+## Deployment
+
+- [Github Repo](https://github.com/Christoph551/Weather-Dashboard)
+- [Deployed Page](https://christoph551.github.io/Weather-Dashboard/)
 
 ![Initial Screen](/Assets/Initial-Screen.PNG)
 ![Previous Cities List](/Assets/Previous-Cities.PNG)
