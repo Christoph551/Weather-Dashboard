@@ -13,9 +13,9 @@ Also, the user should be able to see previously searched cities that they have s
 Please refer to the following screenshots for an example of the functionality. 
 
 
-![Initial Screen](assets/Initial-Screen.PNG)
-![Previous Cities List](assets/Previous-Cities.PNG)
-![Layout of weather data](assets/Work-In-Progress.PNG)
+![Initial Screen](/Assets/Initial-Screen.PNG)
+![Previous Cities List](/Assets/Previous-Cities.PNG)
+![Layout of weather data](/Assets/Work-In-Progress.PNG)
 
 ## License
 
