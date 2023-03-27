@@ -1,87 +1,154 @@
-// Need to maintain local storage of user's input for city name
-
-
+const apiKey = '63b77ed365bd0d35dba55f456d174d34'; // https://home.openweathermap.org/api_keys
 const $main = document.querySelector('#main');
 const $submitBtn = document.querySelector('#submitBtn');
-const $userInput = document.querySelector('#userInput');
+const $userInput = document.getElementById('inputCity');
+const searchHistory = document.querySelector('#searchHistory');
+const previouslySearchedCity = document.querySelector('#previousCityList');
+const $currentDate = document.querySelector('#currentDate');
+let previousSearchList = [];
+let city;
 
-let submitEventHandler = function (event) {
+
+let clickEventHandler = function (event) {
     event.preventDefault();
-    
-    let input = $userInput.value.trim();
-    
-    if (!input) {
+    city = $userInput.value.trim().toUpperCase();
+    console.log($userInput.value);
+    if (city == '') {
+        alert('Please enter a city name to search.')
         return;
     }
-    
-    getApi(requestUrl);
-    
+    getApi();
+    dateWeather();
 }
-// created elements for date display
-const dateFormat = dayjs().format("MMMM D, YYYY");
-const $currentDate = document.querySelector('#currentDate');
-const $figure = document.createElement('figure');
-const $figContent = document.createElement('div');
-const $currentDay = document.createElement('h2');
-
-// These are a quick note for myself to iterate the necessary elements through for loop.
-// Previous Searched Cities as well as the main element all together.
-$figure.setAttribute("class","figure");
-$figContent.setAttribute("class","weatherDisplay");
-$currentDay.innerHTML = dateFormat;       
-$currentDay.setAttribute("class","todaysDate");
-$currentDate.append(dateFormat);
-
 
 
 let getApi = function (weather) {
-    // input = $userInput.val();
-    
-    fetch(requestUrl)
-    .then(function (response) {
-        const apiKey = '63b77ed365bd0d35dba55f456d174d34'; // https://home.openweathermap.org/api_keys
-        const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${$userInput}&appid=${apiKey}`;
-        
-        if (response.ok) {
-            response.json().then(function (data) {
-                displayWeather(data.items, weather);
-            });
-        } else {
-            alert('Error: We could not find the requested information')
-        }
-    });
+    let lang = 'en';
+    let units = 'imperial';
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}&lang=${lang}`;
+
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            if (!previousSearchList.includes(city)) {
+                previousSearchList.push(city);
+                window.localStorage.setItem('storedSearches', JSON.stringify(previousSearchList));
+                previousCity(data);
+                displayToday(data);
+            }
+            // oneCall(data[0].lat, data[0].lon);
+            
+        })
 }
-console.log(requestUrl);
+
+function oneCall(lat, lon) {
+
+    var oneCallAPI = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=${apiKey}&units=imperial`
+
+    fetch(oneCallAPI)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            clearPreviousSearch();
+            displayToday(data.current, data.daily);
+            displayFiveDay(data.daily);
+        })
+}
+
+function previousSearches() {
+    var storedSearches = window.localStorage.getItem("storedSearches")
+    if (storedSearches) {
+        previousSearchList = JSON.parse(storedSearches);
+        previousCity();
+    }
+}
+
+function previousCity(data) {
+    searchHistory.textContent = "Previously Searched Cities";
+    for (i = 0; i < 6; i++) {
+        let searchList = document.createElement('figure');
+        searchList.setAttribute('class', 'list-group-item rounded');
+        searchList.textContent = previousSearchList[i];
+        searchHistory.appendChild(searchList);
+    }
+}
+
+//created function for the previous search buttons to reload that city when clicked
+function previousButton(event) {
+    city = event.target.textContent;
+    getApi(city);
+}
+
+//setup funciton to clear the field for the next searched city
+function clearPreviousSearch() {
+    fiveDayForecast.innerHTML = '';
+    forecastHeader.textContent = '';
+    cityEntered.value = '';
+    todaysWeather.textContent = '';
+}
+
+function displayToday(weather) {
+    const todayData = document.querySelector('#main');
+    const container = document.createElement('figure');
+
+    container.innerHTML = `
+                            <section class="todayWeather">
+                                <h2 class="cityName">${weather.name}</h2>
+                                <aside class="d-flex">
+                                    <ul class="container">
+                                        <li class="listItems">Temperature: ${weather.main.temp} °F</li>
+                                        <li class="listItems">Humidity: ${weather.main.humidity} %</li>
+                                        <li class="listItems">Wind: ${weather.wind.speed} MPH</li>
+                                        <li class="listItems">${weather.weather[0].description}</li>
+                                    </ul>
+                                </aside>
+                            </section>
+                            `;
+    todayData.append(container);
+}
+
+function displayWeek(weather) {
+    const weekData = document.querySelector('.days');
+    const forecast = document.createElement('ol');
+
+    forecast.innerHTML = `
+                        
+                        `
+}
+
+let dateWeather = function (data) {
+
+    if (!$userData) {
+        // Next 5 const are to display the date in the center above the weather data
+        const dateFormat = dayjs().format("MMMM D, YYYY");
+        const $currentDate = document.querySelector('#currentDate');
+        const $figure = document.createElement('figure');
+        const $figContent = document.createElement('div');
+        const $currentDay = document.createElement('h3');
+        $figure.setAttribute("class", "figure");
+        $figContent.setAttribute("class", "weatherDisplay");
+        $currentDay.innerHTML = dateFormat;
+        $currentDay.setAttribute("class", "todaysDate");
+        $currentDate.append(dateFormat);
+    }
+}
+
+let clearDateWeather = function () {
+    $currentDate.innerHTML = '';
+}
 
 
 
 
 
 
-// Need to figure out a for loop to iterate through API data and then append to newly created elements.
-// for (let i = 0; i < weather.length)
 
 
 
 
 
 
-
-
-
-
-
-
-
-$submitBtn.addEventListener('submit', submitEventHandler);
-
-
-
-
-
-
-
-
-
-
-
+$submitBtn.addEventListener('click', clickEventHandler);
