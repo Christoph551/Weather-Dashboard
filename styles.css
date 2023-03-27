@@ -38,7 +38,6 @@ body {
     font-size: xx-large;
     font-weight: bolder;
     margin-left: 0px;
-    border-bottom: thick solid #797979;
 }
 
 .form-label {
@@ -56,11 +55,14 @@ body {
     background-color: rgb(4, 92, 223);
 }
 
+#submitBtn:hover {
+    background-color: rgb(60, 125, 221);
+}
+
 #searchHistory {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top: thick solid #797979;
     color:#5a5a5a;
 }
 
@@ -77,20 +79,28 @@ body {
 /* This is controlling styling on the box intended to show today's weather */
 figure {
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    height: 150px;
-    border: thick solid black;
-    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    width: 500px;
+    border: thick solid black;
+    margin: 5px;
 }
 
+.todayWeather {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cityName {
+    display: flex;
+    justify-content: flex-start;
+}
 
 .container {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 .days {
@@ -100,8 +110,6 @@ figure {
 
 .listItems {
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 50px;
     list-style-type: none;
 }
 
