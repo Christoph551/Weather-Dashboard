@@ -5,6 +5,8 @@ const $userInput = document.getElementById('inputCity');
 const searchHistory = document.querySelector('#searchHistory');
 const previouslySearchedCity = document.querySelector('#previousCityList');
 const $currentDate = document.querySelector('#currentDate');
+const fiveDayForecast = document.querySelector('.days');
+const $inputCity = document.getElementById('inputCity');
 let previousSearchList = [];
 let city;
 
@@ -22,6 +24,7 @@ let clickEventHandler = function (event) {
 }
 
 
+
 let getApi = function (weather) {
     let lang = 'en';
     let units = 'imperial';
@@ -32,29 +35,30 @@ let getApi = function (weather) {
             return response.json();
         })
         .then(function (data) {
-            if (!previousSearchList.includes(city)) {
-                previousSearchList.push(city);
+            if (!previousSearchList.includes(weather)) {
+                previousSearchList.push(weather);
                 window.localStorage.setItem('storedSearches', JSON.stringify(previousSearchList));
                 previousCity(data);
                 displayToday(data);
             }
-            // oneCall(data[0].lat, data[0].lon);
+            oneCall(data.weather[0].lat, data.weather[0].lon);
             
         })
 }
 
-function oneCall(lat, lon) {
-
-    var oneCallAPI = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=${apiKey}&units=imperial`
+function oneCall(weatherData) {
+    let units = 'imperial';
+    city = $userInput.value.trim().toUpperCase();
+    let oneCallAPI = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${apiKey}`
 
     fetch(oneCallAPI)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            clearPreviousSearch();
+            // clearPreviousSearch();
             displayToday(data.current, data.daily);
-            displayFiveDay(data.daily);
+            displayWeek(data.daily);
         })
 }
 
@@ -69,7 +73,7 @@ function previousSearches() {
 function previousCity(data) {
     searchHistory.textContent = "Previously Searched Cities";
     for (i = 0; i < 6; i++) {
-        let searchList = document.createElement('figure');
+        let searchList = document.createElement('div');
         searchList.setAttribute('class', 'list-group-item rounded');
         searchList.textContent = previousSearchList[i];
         searchHistory.appendChild(searchList);
@@ -84,10 +88,10 @@ function previousButton(event) {
 
 //setup funciton to clear the field for the next searched city
 function clearPreviousSearch() {
-    fiveDayForecast.innerHTML = '';
-    forecastHeader.textContent = '';
-    cityEntered.value = '';
-    todaysWeather.textContent = '';
+    // fiveDayForecast.innerHTML = '';
+    // forecastHeader.textContent = '';
+    // $inputCity.value = '';
+    $currentDate.textContent = '';
 }
 
 function displayToday(weather) {
@@ -96,7 +100,8 @@ function displayToday(weather) {
 
     container.innerHTML = `
                             <section class="todayWeather">
-                                <h2 class="cityName">${weather.name}</h2>
+                                <h2 class="cityName">${city}</h2>
+                                <img src=http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png />
                                 <aside class="d-flex">
                                     <ul class="container">
                                         <li class="listItems">Temperature: ${weather.main.temp} °F</li>
@@ -110,18 +115,25 @@ function displayToday(weather) {
     todayData.append(container);
 }
 
-function displayWeek(weather) {
+function displayWeek(data) {
     const weekData = document.querySelector('.days');
-    const forecast = document.createElement('ol');
+    const forecast = document.createElement('div');
 
+    for(i=1; i<6; i++){
     forecast.innerHTML = `
-                        
-                        `
+                        <div>
+                        <img src=http://openweathermap.org/img/wn/${data[i].weather[0].icon}@2x.png />
+                        <ul class="details">
+                            <li>Temp: ${data.list.main} &degF</li>
+                            <li>Wind: ${data.list.wind} MPH</li>
+                            <li>Humidity: ${data.list.weather} %</li>
+                        </ul>
+                        `;
+    }
+    weekData.append(forecast)
 }
 
 let dateWeather = function (data) {
-
-    if (!$userData) {
         // Next 5 const are to display the date in the center above the weather data
         const dateFormat = dayjs().format("MMMM D, YYYY");
         const $currentDate = document.querySelector('#currentDate');
@@ -133,22 +145,16 @@ let dateWeather = function (data) {
         $currentDay.innerHTML = dateFormat;
         $currentDay.setAttribute("class", "todaysDate");
         $currentDate.append(dateFormat);
-    }
+
+}
+
+function weekDate (date) {
+    return dayjs().format("MMMM D, YYYY");
 }
 
 let clearDateWeather = function () {
     $currentDate.innerHTML = '';
 }
-
-
-
-
-
-
-
-
-
-
 
 
 $submitBtn.addEventListener('click', clickEventHandler);
